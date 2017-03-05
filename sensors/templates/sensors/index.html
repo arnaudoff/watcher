@@ -1,0 +1,3 @@
+{% for sensor in sensors %}
+<li><a href="{{ sensor.get_absolute_url }}">{{ sensor.name }}</a></li>
+{% endfor %}
