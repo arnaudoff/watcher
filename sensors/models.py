@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 class Sensor(models.Model):
     name = models.CharField(max_length=20)
@@ -7,13 +8,5 @@ class Sensor(models.Model):
     def __str__(self):
         return self.name
 
-class Trigger(models.Model):
-    time_triggered = models.DateTimeField()
-    sensor = models.ForeignKey('Sensor')
-
-    def __str__(self):
-        return "%s %s" % (self.sensor.name, str(self.time_triggered))
-
-class Capture(models.Model):
-    contents = models.CharField(max_length=65536)
-    trigger = models.ForeignKey('Trigger')
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={"id": self.id})

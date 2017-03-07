@@ -45,7 +45,7 @@ def sensor_update(request, id=None):
         return HttpResponseRedirect(sensor.get_absolute_url())
 
     context = {
-        "sensor": sensor
+        "sensor": sensor,
         "form": form
     }
 

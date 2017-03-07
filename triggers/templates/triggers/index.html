@@ -1,0 +1,7 @@
+{% for trigger in triggers %}
+    <p>{{ time_triggered }}</p>
+
+    {% for capture in trigger.captures %}
+        <img src="{{ capture.contents }}" />
+    {% endfor %}
+{% endfor %}
