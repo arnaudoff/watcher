@@ -1,7 +1,7 @@
 from django.contrib.auth import ( authenticate, get_user_model, login, logout )
 from django.shortcuts import render
 
-from .forms import UserLoginForm
+from .forms import UserLoginForm, UserRegisterForm
 
 def login_view(request):
 	print(request.user.is_authenticated())
@@ -20,3 +20,24 @@ def login_view(request):
 def logout_view(request):
 	logout(request)
 	return render(request, "form.html", {})
+
+def register_view(request):
+	print(request.user.is_authenticated())
+	title = "Register"
+	form = UserRegisterForm(request.POST or None)
+
+	if form.is_valid():
+		user = form.save(commit=False)
+		password = form.cleaned_data.get("password")
+		user.set_password(password)
+		user.save()
+
+		new_user = authenticate(username=user.username, password=password)
+		login(request, new_user)
+		#redirect
+
+	context = {
+		"form": form,
+		"title": title
+	}
+	return render(request, "form.html", context)
