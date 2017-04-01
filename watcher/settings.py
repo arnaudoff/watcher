@@ -55,7 +55,7 @@ TEMPLATES = [
     },
 ]
 
-CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 WSGI_APPLICATION = 'watcher.wsgi.application'
 
