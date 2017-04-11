@@ -4,7 +4,7 @@
 <div class='col-sm-6 col-sm-offset-3'>
 	<h1>Welcome {{ username }}</h1>
 	<hr/>
-	<h2>Sensors: </h2>
+	<h2>Sensors: <a href="add_sensor"><button type="button" class="btn btn-primary">ADD</button></a></h2>
 	{% for item in sensor_results %}
     <p> 
         <div>{{ item.name }}</td>
