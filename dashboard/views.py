@@ -10,11 +10,11 @@ def dashboard_view(request):
 	test = None
 	if request.user.is_authenticated():	
 		username = request.user.username
-		test = Sensor.objects.filter(user=request.user)
+		sensor_results = Sensor.objects.filter(user=request.user)
 
 	context = {
 		'username': username,
-		'sensor_results': test
+		'sensor_results': sensor_results
 	}
 
 	return render(request, "dashboard.html", context)
