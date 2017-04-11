@@ -4,5 +4,12 @@
 <div class='col-sm-6 col-sm-offset-3'>
 	<h1>Welcome {{ username }}</h1>
 	<hr/>
+	<h2>Sensors: </h2>
+	{% for item in sensor_results %}
+    <p> 
+        <div>{{ item.name }}</td>
+    </p>
+    {% endfor %}
+	<hr/>
 </div>
 {% endblock content %}
