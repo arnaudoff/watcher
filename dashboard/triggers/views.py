@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from dashboard.triggers.models import Trigger
 from dashboard.triggers.forms import TriggerForm
 from dashboard.triggers.serializers import TriggerSerializer
+from dashboard.triggers.services import send_user_intruder_notification
 
 def trigger_detail(request, id=None):
     trigger = get_object_or_404(Trigger, id=id)
@@ -27,3 +28,7 @@ def trigger_list(request):
 class TriggerViewSet(viewsets.ModelViewSet):
     queryset = Trigger.objects.all()
     serializer_class = TriggerSerializer
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        send_user_intruder_notification(trigger_metadata=instance)
