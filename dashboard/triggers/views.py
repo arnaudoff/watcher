@@ -1,21 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
+from rest_framework import viewsets
 
-from .forms import TriggerForm
-from .models import Trigger
-
-def trigger_create(request):
-    form = TriggerForm(request.POST or None)
-    if form.is_valid():
-        trigger = form.save(commit=False)
-        trigger.save()
-        return HttpResponseRedirect(trigger.get_absolute_url())
-
-    context = {
-        "form": form
-    }
-
-    return render(request, "triggers/create.html", context)
+from dashboard.triggers.models import Trigger
+from dashboard.triggers.forms import TriggerForm
+from dashboard.triggers.serializers import TriggerSerializer
 
 def trigger_detail(request, id=None):
     trigger = get_object_or_404(Trigger, id=id)
@@ -35,5 +24,6 @@ def trigger_list(request):
 
     return render(request, "triggers/index.html", context)
 
-def trigger_delete(request):
-    return HttpResponse("delete")
+class TriggerViewSet(viewsets.ModelViewSet):
+    queryset = Trigger.objects.all()
+    serializer_class = TriggerSerializer

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Sensor
+from dashboard.sensors.models import Sensor
 
 class SensorModelAdmin(admin.ModelAdmin):
     list_display = ["name", "timestamp", "user", "active"]

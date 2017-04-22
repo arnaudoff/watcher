@@ -3,8 +3,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^sensors/', include("sensors.urls")),
-    url(r'^triggers/', include("triggers.urls")),
     url(r'^users/', include("users.urls")),
-    url(r'^dashboard/', include("dashboard.urls"))
+    url(r'^dashboard/', include("dashboard.urls")),
+    url(r'^api-auth/', include('rest_framework.urls'))
 ]

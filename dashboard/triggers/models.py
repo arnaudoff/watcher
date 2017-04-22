@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.db import models
 
-from sensors.models import Sensor
+from dashboard.sensors.models import Sensor
 
 class Trigger(models.Model):
     time_triggered = models.DateTimeField()

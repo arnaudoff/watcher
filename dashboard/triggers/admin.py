@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import (Trigger, Capture)
+
+from dashboard.triggers.models import (Trigger, Capture)
 
 class TriggerModelAdmin(admin.ModelAdmin):
     list_display = ["time_triggered", "__str__"]

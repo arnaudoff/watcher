@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Trigger
+from dashboard.triggers.models import Trigger
 
 class TriggerForm(forms.ModelForm):
     class Meta:
