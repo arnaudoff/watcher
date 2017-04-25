@@ -82,4 +82,4 @@ def sensor_delete(request, id=None):
     sensor = get_object_or_404(Post, id=id)
     sensor.delete()
     messages.success(request, "Successfully deleted!")
-    return redirect("sensors:list")
+    return redirect("/dashboard/")
