@@ -7,7 +7,7 @@
   <h2>Sensors: <a href="sensors/create"><button type="button" class="btn btn-primary">ADD</button></a></h2>
   {% for item in sensors %}
   <p> 
-    <div>{{ item.name }} <span style="color:#8b0000" class="glyphicon glyphicon-remove"></span></div>
+    <div>{{ item.name }} <a href="sensors/{{ item.id }}/delete" style="color:#8b0000" class="glyphicon glyphicon-remove"></a></div>
   </p>
   {% endfor %}
   <hr/>

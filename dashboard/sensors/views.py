@@ -79,7 +79,7 @@ def sensor_delete(request, id=None):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
 
-    sensor = get_object_or_404(Post, id=id)
+    sensor = get_object_or_404(Sensor, id=id)
     sensor.delete()
     messages.success(request, "Successfully deleted!")
     return redirect("/dashboard/")
