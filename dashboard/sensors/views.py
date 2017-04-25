@@ -18,7 +18,7 @@ def sensor_create(request):
         sensor.save()
 
         messages.success(request, "Successfully created!")
-        return HttpResponseRedirect(sensor.get_absolute_url())
+        return HttpResponseRedirect("/dashboard/")
     else:
         messages.error(request, "Not successfully created!")
 
