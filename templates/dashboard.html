@@ -2,14 +2,23 @@
 
 {% block content %}
 <div class='col-sm-6 col-sm-offset-3'>
-	<h1>Welcome {{ username }}</h1>
-	<hr/>
-	<h2>Sensors: <a href="sensors/create"><button type="button" class="btn btn-primary">ADD</button></a></h2>
-	{% for item in sensor_results %}
-    <p> 
-        <div>{{ item.name }} <span style="color:#8b0000" class="glyphicon glyphicon-remove"></span></div>
-    </p>
-    {% endfor %}
-	<hr/>
+  <h1>Welcome {{ username }}</h1>
+  <hr/>
+  <h2>Sensors: <a href="sensors/create"><button type="button" class="btn btn-primary">ADD</button></a></h2>
+  {% for item in sensors %}
+  <p> 
+    <div>{{ item.name }} <span style="color:#8b0000" class="glyphicon glyphicon-remove"></span></div>
+  </p>
+  {% endfor %}
+  <hr/>
+
+  <h2>Triggers </h2>
+  {% for trigger in triggers %}
+  <p> 
+    <div>{{ trigger.sensor.name }} on {{ trigger.time_triggered }}</div>
+  </p>
+  {% endfor %}
+  <hr/>
+
 </div>
 {% endblock content %}

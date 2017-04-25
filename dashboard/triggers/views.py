@@ -16,14 +16,6 @@ def trigger_detail(request, id=None):
 
     return render(request, "triggers/detail.html", context)
 
-def trigger_list(request):
-    triggers = Trigger.objects.all()
-
-    context = {
-        "triggers": triggers
-    }
-
-    return render(request, "triggers/index.html", context)
 
 class TriggerViewSet(viewsets.ModelViewSet):
     queryset = Trigger.objects.all()

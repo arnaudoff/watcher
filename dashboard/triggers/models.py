@@ -8,7 +8,7 @@ class Trigger(models.Model):
     sensor = models.ForeignKey(Sensor)
 
     def __str__(self):
-        return "%s %s" % (self.sensor.name, str(self.time_triggered))
+        return "%s on %s" % (self.sensor.name, str(self.time_triggered))
 
     def get_absolute_url(self):
         return reverse("detail", kwargs={"id": self.id})

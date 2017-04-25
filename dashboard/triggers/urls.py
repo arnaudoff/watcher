@@ -8,6 +8,5 @@ router.register(r'triggers', views.TriggerViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^$', views.trigger_list),
     url(r'^(?P<id>\d+)/$', views.trigger_detail, name='detail')
 ]
