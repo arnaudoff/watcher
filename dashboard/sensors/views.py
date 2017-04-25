@@ -6,6 +6,8 @@ from dashboard.sensors.forms import SensorForm
 from dashboard.sensors.models import Sensor
 
 def sensor_create(request):
+    title = "Add sensor"
+
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
 
@@ -21,7 +23,8 @@ def sensor_create(request):
         messages.error(request, "Not successfully created!")
 
     context = {
-        "form": form
+        "form": form,
+        "title": title
     }
 
     return render(request, "sensors/create.html", context)
