@@ -6,6 +6,7 @@ from dashboard.sensors.models import Sensor
 class Trigger(models.Model):
     time_triggered = models.DateTimeField()
     sensor = models.ForeignKey(Sensor)
+    image = models.TextField(default='')
 
     def __str__(self):
         return "%s on %s" % (self.sensor.name, str(self.time_triggered))
