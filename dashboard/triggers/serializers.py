@@ -10,4 +10,4 @@ class TriggerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Trigger
-        fields = ('time_triggered', 'image', 'sensor_id')
+        fields = ('time_triggered', 'image')
