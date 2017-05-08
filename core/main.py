@@ -16,7 +16,6 @@ from threading import Thread
 
 # Software-related constants
 URL = 'http://localhost:8000/dashboard/triggers/triggers/'
-LOGIN_URL = 'http://localhost:8000/users/login/'
 USERNAME = 'ivo'
 WEB_PASSWORD = 'sexbog34'
 TMP_IMAGE_FILENAME = 'image.jpg'
@@ -24,7 +23,9 @@ TMP_IMAGE_FILENAME = 'image.jpg'
 # Hardware-related constants
 ARDUINO_ADDRESS = 0x04
 bus = smbus.SMBus(1)
+
 gpio.setmode(gpio.BOARD)
+gpio.setwarnings(False)
 
 MATRIX_KEYS = [
         [1, 2, 3],
@@ -89,7 +90,7 @@ def send_trigger_update(sensor_id):
 
     base64string = base64.b64encode('%s:%s' % (USERNAME, WEB_PASSWORD))
 
-    data = urllib.urlencode(post_fields)
+    data = json.dumps(post_fields).encode("utf8")
     request = urllib2.Request(URL, data=data)
     request.add_header('Content-Type', 'application/json')
     request.add_header('Authorization', 'Basic %s' % base64string)
@@ -97,18 +98,21 @@ def send_trigger_update(sensor_id):
     try:
         connection = opener.open(request)
     except urllib2.HTTPError, e:
+        print e
         connection = e
 
     if connection.code == 200:
         data = connection.read()
         print data
+    print connection.read()
 
 def record_intrusion_video():
-    stream = io.BytesIO()
-    with picamera.PiCamera() as camera:
-        camera.start_recording(stream, format='h264', quality=20)
-        camera.wait_recording(5)
-        camera.stop_recording()
+    camera = picamera.PiCamera()
+    camera.start_recording('video.h264')
+
+    sleep(5)
+
+    camera.stop_recording()
 
 def on_sensor_state_changed(sensor_id):
     stop_stream()
@@ -133,11 +137,11 @@ def read_sensors():
 
             sensor_states = read_sensor_states()
             if sensor_states[0]:
-                on_sensor_state_changed(2)
+                on_sensor_state_changed(1)
             if sensor_states[1]:
-                on_sensor_state_changed(3)
+                on_sensor_state_changed(2)
             if sensor_states[2]:
-                on_sensor_state_changed(15)
+                on_sensor_state_changed(3)
 
     except KeyboardInterrupt:
         gpio.cleanup()
@@ -185,6 +189,7 @@ def read_matrix():
         gpio.cleanup()
 
 setup_matrix()
+
 gpio.setup(SYSTEM_STATUS_LED_PIN, gpio.OUT)
 gpio.output(SYSTEM_STATUS_LED_PIN, gpio.LOW)
 
