@@ -17,7 +17,13 @@
   <hr />
   {% for trigger in triggers %}
   <p> 
-    <div>{{ trigger.sensor.name }} on {{ trigger.time_triggered }}</div>
+    <div>
+	<b>[<span style="color: red">!</span>]</b> <b>{{ trigger.sensor.name }}</b> triggered on <b>{{ trigger.time_triggered }}</b> by the following intruder
+    </div>
+    <br />
+    <div>
+      <img height="500px" width="500px" src="data:image/png;base64, {{ trigger.image }}" />
+    </div>
   </p>
   {% endfor %}
   <br/>

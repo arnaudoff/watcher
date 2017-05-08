@@ -83,7 +83,7 @@ def send_trigger_update(sensor_id):
 
     post_fields = {
         'time_triggered': str(datetime.now()),
-        'sensor_id': sensor_id,
+        'sensor': sensor_id,
         'image': base64_encoded_img
     }
 
@@ -112,7 +112,6 @@ def record_intrusion_video():
 
 def on_sensor_state_changed(sensor_id):
     stop_stream()
-    time.sleep(1)
 
     take_picture()
     send_trigger_update(sensor_id)
@@ -138,7 +137,7 @@ def read_sensors():
             if sensor_states[1]:
                 on_sensor_state_changed(3)
             if sensor_states[2]:
-                on_sensor_state_changed(4)
+                on_sensor_state_changed(15)
 
     except KeyboardInterrupt:
         gpio.cleanup()

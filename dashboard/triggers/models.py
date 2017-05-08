@@ -5,7 +5,7 @@ from dashboard.sensors.models import Sensor
 
 class Trigger(models.Model):
     time_triggered = models.DateTimeField()
-    sensor = models.ForeignKey(Sensor)
+    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, null=True, blank=True)
     image = models.TextField(default='')
 
     def __str__(self):

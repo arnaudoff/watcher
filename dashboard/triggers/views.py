@@ -22,5 +22,6 @@ class TriggerViewSet(viewsets.ModelViewSet):
     serializer_class = TriggerSerializer
 
     def perform_create(self, serializer):
-        instance = serializer.save()
-        send_user_intruder_notification(trigger_metadata=instance)
+        if serializer.is_valid():
+            instance = serializer.save()
+            send_user_intruder_notification(trigger_metadata=instance)
